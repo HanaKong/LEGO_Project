@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+* {
+  font-family: 'SUITE-Regular';
+  color: #333;
+}
+.idView-box {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 450px;
+  height: 450px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.idView-box .inner-box {
+  width : 350px;
+  height: 450px;
+  margin: 0 auto 0;
+  justify-content: center;
+}
+.inner-box .inner-box-text1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 60px 0 40px;
+}
+.inner-box .inner-box-text2 {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+.inner-box .text-under {
+  display: block;    
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 20px;
+}
+.inner-box .inner-box-text3 {
+  font-size: 1.3rem;
+  text-align: center;
+}
+.inner-box .findUid-close {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  background-color: #777;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 10px;
+} 

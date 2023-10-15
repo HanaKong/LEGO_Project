@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'SUITE-Regular';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+* {
+	font-family: 'SUITE-Regular';
+	color: #111;
+}
+
+.pwdChk-box {
+  	width: 33%;
+	margin: 300px auto 0;	
+  	justify-content: center;
+}
+
+.pwdChk-box .pwdChk-title {
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+	font-weight: 900;
+}
+.pwdChk-box .title-btm {
+	border: 1px solid rgba(0,0,0,0.1);
+}
+.pwdChk-box .content-box {
+	margin-top: 20px;
+	border: 1px solid rgba(0,0,0,0.1);
+	padding: 40px;
+}
+
+.pwdChk-box .content-box .content-title {
+	font-size: 1.2rem;
+	font-weight: 900;
+}
+
+.pwdChk-box .content-box .content-sub-title {
+	margin-top: 10px;
+	font-size: 1.0rem;
+	color: #999;
+}
+.pwdChk-box .content-box .content-sub-title span {
+	color: #007fff;
+	font-weight: bolder;
+}
+
+.pwdChk-box .content-box .pwd-box {
+	margin-top: 25px;
+	display: inline-block;
+	align-items: center;
+}
+
+.pwdChk-box .content-box .pwd-box label {
+	font-size: 1.0rem;
+	margin-right: 5px;
+}
+
+.pwdChk-box .content-box .pwd-box input[type="password"] {
+	width: 250px;
+	height: 40px;
+	padding-left: 10px;
+	font-size: 1rem;
+	font-family: Verdana;
+	letter-spacing: 0.125em;
+}
+.pwdChk-box .content-box .pwd-box input[type="password"]:focus {
+	font-size: 0.9rem;
+}
+.pwdChk-box .content-box .pwd-box input[type="button"] {
+	width: 95px;
+	font-size: 1.0rem;
+	height: 40px;
+	background-color: #007fff;
+	color: #fff;
+	margin-left: 10px;
+}
+
+.verifyPwd-margin {
+	margin-top : 400px;
+}
