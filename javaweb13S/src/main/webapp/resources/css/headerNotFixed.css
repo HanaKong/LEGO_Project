@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LeferiPoint-BlackA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'SUITE-Regular';
+}
+.head-main {
+    width: 90%;
+    height: 90px;
+    margin: 0 auto 0;
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr;
+    font-size: 1.0rem;
+    font-weight: 400;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-width: 0 0 1px 0;
+}
+
+.main-left {
+    display: grid;
+    align-items: center;
+}
+
+.head-center {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.head-right {
+    display: grid;
+    grid-template-columns: 45px;
+    justify-content: end;
+}
+
+.head-right .main-mypage {
+    position: absolute;
+    top: 35px;
+    right: 60px;
+    align-items: center;
+    justify-content: end;
+    margin-right: 20px;
+}
+.head-right .main-mypage-box {
+	display : flex;
+	align-items : center;
+	justify-content : flex-start;
+	margin-right: 50px;
+    width: 210px;
+    cursor: pointer;	
+}
+.head-right .mypage-text {
+	margin : 0 7px;
+}
+.head-right .hamburger span {
+    display: block;
+    width: 17px;
+    height: 2px;
+    margin-bottom: 3px;
+    position: relative;
+    background: #333;
+    border-radius: 3px;
+}
+.main-mypage .options {
+    width: 130px;
+    position: relative;
+    padding: 18px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
+    display: none;
+}
+.main-mypage.active .options {
+    display: block;
+}
+.options .option{
+    display: flex;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 8px;
+    align-items: center;
+    background: #fff;
+}
+.options .option:hover{
+    background: #F2F2F2;
+}
+.option .option-text{
+    font-size: 18px;
+    color: #333;
+}
+
+.head-right .main-cart-box {
+    background-color: #f8f8f8;
+    text-align: center;
+    display: grid;
+    font-weight: 700;
+}
+
+.head-right .main-cart-box .cart-name {
+    margin-top: 25px;
+    font-size: 0.8rem;
+}
+
+.head-right .main-cart-box .cart-num {
+    margin-top: 10px;
+    align-items: stretch;
+}

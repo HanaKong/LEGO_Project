@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaweb13S.dao.AdminDAO">
+
+	<select id="getMemberList" resultType="com.spring.javaweb13S.vo.MemberVO">
+		select * , timestampdiff(day, lastDate, now()) as deleteDiff from member <if test='searchItem != ""'>
+        where ${searchSw} like CONCAT('%',#{searchItem},'%')</if> order by idx desc limit #{startIndexNo},#{pageSize};
+	</select>
+
+	<select id="getCategoryList" resultType="com.spring.javaweb13S.vo.CategoryVO">
+		select * from topCategory <if test='searchItem != ""'>
+        where ${searchSw} like CONCAT('%',#{searchItem},'%')</if> order by idx <if test='pageSize != 0'>limit #{startIndexNo},#{pageSize};</if>
+	</select>
+	
+	<select id="getProductList" resultType="com.spring.javaweb13S.vo.ProductVO">
+		select *, price*(1-discountRate/100) as productDiscountPrice from product <if test='searchItem != ""'>
+        where ${searchSw} like CONCAT('%',#{searchItem},'%')</if> order by <if test='p == ""'>idx desc</if><if test='p != ""'>price ${p}</if><if test='pageSize != 0'>limit #{startIndexNo},#{pageSize};</if>;
+	</select>
+	
+	<select id="totRecCnt" resultType="int">
+    	select count(*) from topCategory <if test='searchItem != ""'>
+        where ${searchSw} like CONCAT('%',#{searchItem},'%')</if>;
+  	</select>
+  	
+	<select id="productTotRecCnt" resultType="int">
+    	select count(*) from product <if test='searchItem != ""'>
+        where ${searchSw} like CONCAT('%',#{searchItem},'%')</if>;
+  	</select>
+
+	<select id="getProductContent" resultType="com.spring.javaweb13S.vo.ProductVO">
+		select * from product where idx = #{idx}; 
+	</select>
+	
+	<select id="getProductImg" resultType="com.spring.javaweb13S.vo.ProductImgVO">
+		select * from productImg where productCode = #{productCode}; 
+	</select>
+	
+	<select id="getProductVideo" resultType="com.spring.javaweb13S.vo.ProductImgVO">
+		select * from productVideo where productCode = #{productCode}; 
+	</select>
+	
+	<select id="getProductCount" resultType="int">
+		select count(*) from product <if test='code != ""'>
+        where ${categoryCode} like CONCAT('%',#{code},'%')</if> order by idx desc;
+	</select>
+	
+	<select id="getQnaNoReply" resultType="com.spring.javaweb13S.vo.QnaVO">
+		select * from QnA where answerSW = 0 order by idx desc<if test='pageSize != 0'>limit #{startIndexNo},#{pageSize}</if>; 
+	</select>
+	
+	<select id="QnaNoReplyTotRecCnt" resultType="int">
+		select count(*) from Qna where answerSW = 0;
+	</select>
+	
+	<select id="getStoreMap" resultType="com.spring.javaweb13S.vo.StoreMapVO">
+		select * from storeMap order by idx desc; 
+	</select>
+	
+	
+	
+
+
+
+	<insert id="setCategory">
+		insert into topCategory values(default, #{categoryCode}, #{categoryName});
+	</insert>
+	
+	<insert id="setProductInput">
+		insert into product values(default, #{vo.categoryCode}, #{vo.productCode}, #{vo.productName}, #{vo.price}, #{vo.discountRate}, #{vo.age}, #{vo.partsNumber}, #{vo.point}, #{vo.stock}, default, #{vo.switchItem}, #{vo.fName}, #{vo.content});
+	</insert>
+	
+	<insert id="setFile">
+		insert into productImg values(#{vo.productCode}, #{vo.FName})
+	</insert>
+	
+	<insert id="setVideo">
+		insert into productVideo values(#{vo.productCode}, #{vo.FName})
+	</insert>
+	
+	<insert id="setQnaReply">
+		insert into QnaReply values(default, #{productIdx}, #{idx}, '판매자', default, #{textContent});
+	</insert>
+	
+	<insert id="setStoreMap">
+		insert into storeMap values(default, #{locationName}, #{addr}, #{coordsTemp}, #{locationTel}, #{locationText});
+	</insert>
+
+
+
+
+	<update id="setMemberLevelUpdate">
+		update member set level = #{level} where idx = #{idx};
+	</update>
+	
+	<update id="productStateChange">
+		update product set switchItem = #{switchItem} where idx = #{idx};
+	</update>
+	
+	<update id="setQnaUpdate">
+		update qna set answerSW = '1' where idx = #{idx}; 
+	</update>
+	
+	<update id="setProductUpdate">
+		update product set 
+	</update>
+	
+
+
+
+	<delete id="setMemberDelete">
+		delete from member where idx = #{idx}; 
+	</delete>
+	
+	<delete id="setCategoryDelete">
+		delete from topCategory where idx = #{idx};
+	</delete>
+	
+	<delete id="productDelete">
+		delete from product where idx = #{idx};
+	</delete>
+	
+	<delete id="setQnaDelete">
+		delete from qna where idx = #{idx};
+	</delete>
+	
+	<delete id="setStoreMapDelete">
+		delete from storeMap where idx = #{idx};
+	</delete>
+	
+	
+	
+	
+</mapper>

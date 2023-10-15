@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaweb13S.dao.StoreDAO">
+
+	<select id="getProductInfo" resultType="com.spring.javaweb13S.vo.ProductVO">
+		select *, price*(1-discountRate/100) as productDiscountPrice from product where idx = #{idx};
+	</select>
+	
+	<select id="getSearchCartInfo" resultType="com.spring.javaweb13S.vo.CartVO">
+		select * from cart where productidx = #{idx} and uid = #{uid};
+	</select>
+	
+	<select id="getCartList" resultType="com.spring.javaweb13S.vo.CartVO">
+		select * from cart where uid = #{uid};
+	</select>
+	
+	<select id="getCartCnt" resultType = "int">
+		select count(*) from cart where uid = #{uid};
+	</select>
+	
+	<select id="getWatchList" resultType = "com.spring.javaweb13S.vo.WatchListVO">
+		select * from watchList where uid = #{uid} and productIdx = #{productIdx};
+	</select>
+	
+	<select id="getPaymentList" resultType = "com.spring.javaweb13S.vo.CartVO">
+		select * from cart where idx = #{idx};
+	</select>
+	
+	<select id="getMemberInfo" resultType = "com.spring.javaweb13S.vo.MemberVO">
+		select * from member where uid = #{uid};
+	</select>
+	
+	<select id="getQnaInfo" resultType = "com.spring.javaweb13S.vo.QnaVO">
+		select * from QnA where productIdx = #{idx} <if test='searchItem != ""'>
+        and uid = #{searchItem}</if> order by answerSW asc, idx desc  <if test='pageSize != 0'>limit #{startIndexNo},#{pageSize}</if>;
+	</select>
+	
+	<select id="QnaTotRecCnt" resultType="int">
+    	select count(*) from QnA where productIdx = #{productIdx}<if test='searchItem != ""'>and uid = #{searchItem}</if>;
+  	</select>
+  	
+	<select id="getQnaReplyInfo" resultType="com.spring.javaweb13S.vo.QnaReplyVO">
+    	select * from QnaReply where productIdx = #{idx};
+  	</select>
+  	
+	<select id="getReviewInfo" resultType="com.spring.javaweb13S.vo.ReviewVO">
+    	select * from review where productIdx = #{idx} <if test='searchItem != ""'>
+        and uid = #{searchItem}</if> order by idx desc  <if test='pageSize != 0'>limit #{startIndexNo},#{pageSize}</if>;
+  	</select>
+  	
+	<select id="getAvgReview" resultType="com.spring.javaweb13S.vo.AvgReviewVO">
+    	select count(*) as cntReview, round(avg(evaluateMain),1) as avgMain, round(avg(evaluateSub1),1) as avgSub1, round(avg(evaluateSub2),1) as avgSub2, round(avg(evaluateSub3),1) as avgSub3 from review where productIdx = #{idx};
+  	</select>
+  	
+  	<select id="ReviewTotRecCnt" resultType="int">
+    	select count(*) from review where productIdx = #{productIdx}<if test='searchItem != ""'>and uid = #{searchItem}</if>;
+  	</select>
+  	
+	<select id="getCartInfo" resultType="com.spring.javaweb13S.vo.CartVO">
+    	select * from cart where idx = #{cartIdx};
+  	</select>
+  	
+	
+	
+	
+	
+	<insert id="setCartItem">
+		insert into cart values(default, #{uid}, #{idx}, #{productName}, #{price}, #{point}, #{quantity}, #{FName});
+	</insert>
+	
+	<insert id="setWatchList">
+		insert into watchList values(#{uid}, #{productIdx}, #{productName}, #{price}, #{discountRate}, #{FName});
+	</insert>
+	
+	<insert id="setQnAInfo">
+		insert into QnA values(default, #{uid}, #{productIdx}, #{productName}, #{content}, default, default, #{QnaSW}, #{hostIP}, #{FName});
+	</insert>
+	
+	<insert id="setReviewInfo">
+		insert into review values(default, #{uid}, #{productIdx}, #{productTitle}, #{content}, #{result1Value}, #{result2Value}, #{result3Value}, #{result4Value}, default, #{FName}, #{hostIP}, #{randomNum});
+	</insert>
+	
+	<insert id="setOrderInfo">
+		insert into productOrder values(default, #{merchant_uid}, #{uid}, #{productIdx}, #{productName}, #{price}, #{point}, #{quantity}, #{FName}, #{buyer_name}, #{buyer_email}, #{buyer_tel}, #{buyer_addr}, #{buyer_postcode}, #{amount}, #{pointUsage}, #{memo}, default, default);
+	</insert>
+	
+	
+	
+	
+	<update id="updateCartQuantity">
+		update cart set quantity = quantity + #{quantity}, price = price + (${quantity}*${productPrice}) where productidx = #{idx} and uid = #{uid};
+	</update>
+	
+	<update id="updateMemberPoint">
+		update member set point = point - #{pointUsage} where uid = #{uid};
+	</update>
+	
+	
+	
+	
+	
+	
+	<delete id="setWatchListDelete">
+		delete from watchList where uid = #{uid} and productIdx = #{idx};
+	</delete>
+	
+	<delete id="setCartDelete">
+		delete from cart where idx = #{idx};
+	</delete>
+	
+	<delete id="setCartDeleteByOrder">
+		delete from cart where idx = #{idx};
+	</delete>
+	
+	
+</mapper>
